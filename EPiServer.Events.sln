@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPiServer.Events.Sockets", "src\EPiServer.Events.Sockets\EPiServer.Events.Sockets.csproj", "{653C2413-E8C7-4237-A3A9-7265333D346F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B350AAE4-0DD9-45F6-8396-4DF0DD157245}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.config = NuGet.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{653C2413-E8C7-4237-A3A9-7265333D346F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653C2413-E8C7-4237-A3A9-7265333D346F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653C2413-E8C7-4237-A3A9-7265333D346F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653C2413-E8C7-4237-A3A9-7265333D346F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A34A058-95BC-48E3-B1EE-DF7798DF3A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A34A058-95BC-48E3-B1EE-DF7798DF3A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A34A058-95BC-48E3-B1EE-DF7798DF3A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A34A058-95BC-48E3-B1EE-DF7798DF3A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1FA2AA6F-6F1E-42CA-92F4-F179264260F0}
+	EndGlobalSection
+EndGlobal
