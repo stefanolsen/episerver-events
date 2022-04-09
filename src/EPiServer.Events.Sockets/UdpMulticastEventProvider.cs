@@ -11,7 +11,7 @@ using EPiServer.Logging;
 
 namespace EPiServer.Events.Sockets
 {
-    public class UdpMulticastEventProvider : EventProvider, IDisposable
+    public sealed class UdpMulticastEventProvider : EventProvider, IDisposable
     {
         private static readonly ILogger Logger = LogManager.GetLogger(typeof(UdpMulticastEventProvider));
 
