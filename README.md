@@ -16,11 +16,11 @@ Configure one of the event providers in appsettings.json (or one of its transfor
         // Configure either of the two providers here and remove the other.
         "UdpMulticastEventProvider": {
             "Address": "239.255.255.19",
-            "Port: 6000
+            "Port": 6000
         }
         "UdpUnicastEventProvider": {
             "BindHost": "0.0.0.0",
-            "Port: 6000,
+            "Port": 6000,
             "Endpoints": [
                 { "Host": "server2.local", "Port": 6000 },
                 { "Host": "server3.local", "Port": 6000 }
