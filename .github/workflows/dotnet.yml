@@ -1,0 +1,36 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+  pull_request:
+    branches:
+      - '*'
+      - '!main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      buildConfiguration: release
+      versionSuffix: ${{ github.ref == 'refs/heads/develop' && '-pre-' ||  '-ci-' }}${{github.RUN_NUMBER }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      if:  ${{ github.ref == 'refs/heads/main' }}
+      run: dotnet build --no-restore --configuration $env:buildConfiguration
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --configuration $env:buildConfiguration
+    - name: Pack
+      if:  ${{ github.ref == 'refs/heads/main' }}
+      run: dotnet pack --no-build --no-restore --configuration $env:buildConfiguration -o out
