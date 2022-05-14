@@ -10,7 +10,7 @@ namespace EPiServer.Events.Sockets
         public string BindHost { get; set; } = "0.0.0.0";
         public int Port { get; set; } = 6000;
 
-        public ICollection<UdpEndpoint> Endpoints { get; set; } = Array.Empty<UdpEndpoint>();
+        public ICollection<UdpEndpoint> Endpoints { get; set; } = new List<UdpEndpoint>();
     }
 
     public class UdpEndpoint
