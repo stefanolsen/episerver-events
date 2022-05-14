@@ -27,11 +27,9 @@ namespace EPiServer.Events.Sockets
             _sender = new BroadcastBlock<EventMessage>(msg => msg);
             foreach (var endpoint in options.Endpoints)
             {
-                var ipEndPoint = new IPEndPoint(IPAddress.Parse(endpoint.Host), endpoint.Port);
-
                 var actionBlock = new ActionBlock<EventMessage>(async msg =>
                 {
-                    await SendMessageInternal(msg, ipEndPoint);
+                    await SendMessageInternal(msg, endpoint.Host, endpoint.Port);
                 });
 
                 _sender.LinkTo(actionBlock, new DataflowLinkOptions { PropagateCompletion = true });
@@ -89,12 +87,12 @@ namespace EPiServer.Events.Sockets
             }
         }
 
-        private async Task SendMessageInternal(EventMessage message, IPEndPoint endPoint)
+        private async Task SendMessageInternal(EventMessage message, string hostname, int port)
         {
             await using var memoryStream = new MemoryStream();
             _serializer.WriteObject(memoryStream, message);
 
-            await _udpClient.SendAsync(memoryStream.ToArray(), (int)memoryStream.Length, new IPEndPoint(endPoint.Address, endPoint.Port));
+            await _udpClient.SendAsync(memoryStream.ToArray(), (int)memoryStream.Length, hostname, port);
         }
     }
 }
