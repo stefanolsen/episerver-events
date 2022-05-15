@@ -13,8 +13,10 @@
 		<PackageTags></PackageTags>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/stefanolsen/episerver-events</RepositoryUrl>
-		<IncludeSymbols>true</IncludeSymbols>
+		<RepositoryUrl>https://github.com/stefanolsen/episerver-events.git</RepositoryUrl>
+		<DebugType>embedded</DebugType>
+		<IncludeSymbols>false</IncludeSymbols>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
