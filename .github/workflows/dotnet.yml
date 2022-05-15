@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --no-restore --configuration ${{ env.buildConfiguration }}
     - name: Build (Prerelease version)
       if:  ${{ github.ref != 'refs/heads/main' }}
-      run: dotnet build --no-restore --configuration ${{ env:buildConfiguration }} --version-suffix ${{ env:versionSuffix }}
+      run: dotnet build --no-restore --configuration ${{ env.buildConfiguration }} --version-suffix ${{ env:versionSuffix }}
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration ${{ env.buildConfiguration }}
     - name: Pack
@@ -36,6 +36,6 @@ jobs:
       run: dotnet pack --no-build --no-restore --configuration ${{ env.buildConfiguration }} -o out
     - name: Pack (Prerelease version)
       if:  ${{ github.ref != 'refs/heads/main' }}
-      run: dotnet pack --no-build --no-restore --configuration ${{ env:buildConfiguration }} --version-suffix ${{ env:versionSuffix }} -o out
+      run: dotnet pack --no-build --no-restore --configuration ${{ env.buildConfiguration }} --version-suffix ${{ env.versionSuffix }} -o out
     - name: Publish packages
       run: dotnet nuget push **/*.nupkg --skip-duplicate -k ${{ secrets.GITHUB_TOKEN }}
