@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --no-restore --configuration ${{ env.buildConfiguration }}
     - name: Build (Prerelease version)
       if:  ${{ github.ref != 'refs/heads/main' }}
-      run: dotnet build --no-restore --configuration ${{ env.buildConfiguration }} --version-suffix ${{ env:versionSuffix }}
+      run: dotnet build --no-restore --configuration ${{ env.buildConfiguration }} --version-suffix ${{ env.versionSuffix }}
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration ${{ env.buildConfiguration }}
     - name: Pack
