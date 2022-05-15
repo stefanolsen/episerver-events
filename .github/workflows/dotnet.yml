@@ -18,9 +18,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
+      with:
+          source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
