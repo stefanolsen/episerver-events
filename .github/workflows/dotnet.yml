@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       buildConfiguration: 'Release'
-      versionSuffix: ${{ github.ref == 'refs/heads/develop' && '-pre-' ||  '-ci-' }}${{github.RUN_NUMBER }}
+      versionSuffix: ${{ github.ref == 'refs/heads/develop' && 'pre-' ||  'ci-' }}${{github.RUN_NUMBER }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
