@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace EPiServer.Events.Sockets
+namespace StefanOlsen.Optimizely.Events.Sockets
 {
     public static class ServiceCollectionExtensions
     {

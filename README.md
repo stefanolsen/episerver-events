@@ -1,4 +1,4 @@
-# EPiServer.Events.Sockets
+# StefanOlsen.Optimizely.Events.Sockets
 
 ## Introduction
 This repository contains remote event providers that transmit messages using different technologies.
@@ -10,8 +10,8 @@ Configure one of the event providers in appsettings.json (or one of its transfor
     "Cms": {
         "EventProvider": {
             // Choose either of the two providers here and remove the other.
-            //"Provider": "EPiServer.Events.Sockets.UdpMulticastEventProvider, EPiServer.Events.Sockets"
-            "Provider": "EPiServer.Events.Sockets.UdpUnicastEventProvider, EPiServer.Events.Sockets"
+            //"Provider": "StefanOlsen.Optimizely.Events.Sockets.UdpMulticastEventProvider, StefanOlsen.Optimizely.Events.Sockets"
+            "Provider": "StefanOlsen.Optimizely.Events.Sockets.UdpUnicastEventProvider, StefanOlsen.Optimizely.Events.Sockets"
         },
         // Configure either of the two providers here and remove the other.
         "UdpMulticastEventProvider": {
@@ -32,7 +32,7 @@ Configure one of the event providers in appsettings.json (or one of its transfor
 
 Or configure it in Startup.cs, like this:
 ```
-using EPiServer.Events.Sockets;
+using StefanOlsen.Optimizely.Events.Sockets;
 
 public static class ServiceCollectionExtensions{
     public void ConfigureServices(IServiceCollection services)

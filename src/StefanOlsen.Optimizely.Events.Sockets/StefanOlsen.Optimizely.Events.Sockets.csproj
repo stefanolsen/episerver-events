@@ -5,9 +5,9 @@
 		<Authors>Stefan Olsen</Authors>
 		<Company>Stefan Olsen</Company>
 		<Description>Efficient Optimizely EventProvider based on .NET Sockets.</Description>
-		<PackageId>StefanOlsen.Episerver.Events.Sockets</PackageId>
-		<PackageVersion>1.0.1</PackageVersion>
-		<Product>StefanOlsen.Episerver.Events.Sockets</Product>
+		<PackageId>StefanOlsen.Optimizely.Events.Sockets</PackageId>
+		<PackageVersion>1.1.0</PackageVersion>
+		<Product>StefanOlsen.Optimizely.Events.Sockets</Product>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags></PackageTags>
