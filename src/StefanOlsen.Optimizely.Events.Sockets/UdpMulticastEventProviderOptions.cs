@@ -1,6 +1,6 @@
 ﻿using EPiServer.ServiceLocation;
 
-namespace EPiServer.Events.Sockets
+namespace StefanOlsen.Optimizely.Events.Sockets
 {
     [Options(ConfigurationSection = "Cms")]
     public class UdpMulticastEventProviderOptions

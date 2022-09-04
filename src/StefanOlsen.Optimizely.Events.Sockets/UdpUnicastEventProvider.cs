@@ -6,45 +6,39 @@ using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
+using EPiServer.Events;
 using EPiServer.Events.Providers;
 using EPiServer.Logging;
 
-namespace EPiServer.Events.Sockets
+namespace StefanOlsen.Optimizely.Events.Sockets
 {
-    public sealed class UdpMulticastEventProvider : EventProvider, IDisposable
+    public sealed class UdpUnicastEventProvider : EventProvider, IDisposable
     {
-        private static readonly ILogger Logger = LogManager.GetLogger(typeof(UdpMulticastEventProvider));
-
-        private readonly ActionBlock<EventMessage> _sender;
+        private static readonly ILogger Logger = LogManager.GetLogger(typeof(UdpUnicastEventProvider));
         private readonly CancellationTokenSource _cancellationTokenSource = new();
-        private readonly UdpMulticastEventProviderOptions _options;
-        private readonly IPAddress _ipAddress;
+        private readonly BroadcastBlock<EventMessage> _sender;
         private readonly DataContractSerializer _serializer;
         private readonly UdpClient _udpClient;
 
-        public UdpMulticastEventProvider(EventsServiceKnownTypesLookup knownTypesLookup, UdpMulticastEventProviderOptions options)
+        public UdpUnicastEventProvider(EventsServiceKnownTypesLookup knownTypesLookup, UdpUnicastEventProviderOptions options)
         {
-            _options = options;
-            _ipAddress = IPAddress.Parse(_options.Address);
-
             _serializer = new DataContractSerializer(typeof(EventMessage), knownTypesLookup.KnownTypes);
-            _udpClient = new UdpClient(_options.Port, _ipAddress.AddressFamily);
+            _udpClient = new UdpClient(new IPEndPoint(IPAddress.Parse(options.BindHost), options.Port));
 
-            _sender = new ActionBlock<EventMessage>(
-                SendMessageInternal,
-                new ExecutionDataflowBlockOptions
+            _sender = new BroadcastBlock<EventMessage>(msg => msg);
+            foreach (var endpoint in options.Endpoints)
+            {
+                var actionBlock = new ActionBlock<EventMessage>(async msg =>
                 {
-                    CancellationToken = _cancellationTokenSource.Token
+                    await SendMessageInternal(msg, endpoint.Host, endpoint.Port);
                 });
+
+                _sender.LinkTo(actionBlock, new DataflowLinkOptions { PropagateCompletion = true });
+            }
         }
 
         public override Task InitializeAsync()
         {
-            // Ensure that we will not receive our own messages.
-            _udpClient.MulticastLoopback = false;
-            
-            _udpClient.JoinMulticastGroup(_ipAddress);
-
             Task.Factory.StartNew(BeginReceiveAsync, _cancellationTokenSource.Token);
 
             return Task.CompletedTask;
@@ -62,10 +56,7 @@ namespace EPiServer.Events.Sockets
 
         public override void Uninitialize()
         {
-            // Stop the send and receive loops gracefully.
             _cancellationTokenSource.Cancel();
-
-            _udpClient.DropMulticastGroup(_ipAddress);
             _udpClient.Close();
         }
 
@@ -97,12 +88,12 @@ namespace EPiServer.Events.Sockets
             }
         }
 
-        private async Task SendMessageInternal(EventMessage message)
+        private async Task SendMessageInternal(EventMessage message, string hostname, int port)
         {
             await using var memoryStream = new MemoryStream();
             _serializer.WriteObject(memoryStream, message);
 
-            await _udpClient.SendAsync(memoryStream.ToArray(), (int)memoryStream.Length, new IPEndPoint(_ipAddress, _options.Port));
+            await _udpClient.SendAsync(memoryStream.ToArray(), (int)memoryStream.Length, hostname, port);
         }
     }
 }
