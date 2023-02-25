@@ -8,7 +8,6 @@
         <PackageId>StefanOlsen.Optimizely.Events.Redis</PackageId>
         <Product>StefanOlsen.Optimizely.Events.Redis</Product>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags></PackageTags>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryType>git</RepositoryType>
