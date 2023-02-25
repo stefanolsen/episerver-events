@@ -39,6 +39,6 @@ jobs:
       run: dotnet pack --no-build --no-restore --configuration ${{ env.buildConfiguration }} -o out
     - name: Pack (Prerelease version)
       if:  ${{ github.ref != 'refs/heads/main' }}
-      run: dotnet pack --no-build --no-restore --configuration ${{ env.buildConfiguration }} --version-suffix ${{ env.packageVersionSuffix }} -o out
+      run: dotnet pack --no-build --no-restore --configuration ${{ env.buildConfiguration }} --version-suffix ${{ env.packageVersionSuffix }}
     - name: Publish packages
       run: dotnet nuget push **/*.nupkg --skip-duplicate --source https://nuget.pkg.github.com/stefanolsen/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
