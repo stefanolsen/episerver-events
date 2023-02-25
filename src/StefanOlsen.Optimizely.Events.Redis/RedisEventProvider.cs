@@ -37,7 +37,7 @@ namespace StefanOlsen.Optimizely.Events.Redis
         {
             _connectionMultiplexer = await ConnectionMultiplexer.ConnectAsync(_options.ConnectionString);
             _subscriber = _connectionMultiplexer.GetSubscriber();
-
+            
             await _subscriber.SubscribeAsync(_options.PubSubChannel, OnMessageReceived);
         }
 
