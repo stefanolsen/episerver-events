@@ -1,4 +1,4 @@
-# StefanOlsen.Optimizely.Events.Sockets
+# StefanOlsen.Optimizely.Events.Redis
 
 ## Introduction
 This repository contains remote event providers that transmit messages using different technologies.
@@ -57,6 +57,42 @@ public static class ServiceCollectionExtensions{
             };
         });
         services.AddUdpUnicastEventProvider();
+    }
+}
+```
+
+## Configuration (Redis)
+Configure one of the event providers in appsettings.json (or one of its transform files), like this:
+```
+"EPiServer": {
+    "Cms": {
+        "EventProvider": {
+            "Provider": "StefanOlsen.Optimizely.Events.Redis.RedisEventProvider, StefanOlsen.Optimizely.Events.Redis"
+        },
+        "RedisEventProvider": {
+            // Connection string can also contain credentials, cluster-specific settings etc.
+            "ConnectionString": "redis-srv.local",
+            // Colons can be used to build a hierarchical channel key.
+            "PubSubChannel": "optimizely:staging:events"
+        }
+    }
+}
+```
+
+Or configure it in Startup.cs, like this:
+```
+using StefanOlsen.Optimizely.Events.Redis;
+
+public static class ServiceCollectionExtensions{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Copy and edit this block for UDP multicast.
+        services.Configure<RedisEventProviderOptions>(opts =>
+        {
+            opts.ConnectionString = "redis-srv.local";
+            opts.PubSubChannel = "optimizely:staging:events";
+        });
+        services.AddRedisEventProvider();
     }
 }
 ```
