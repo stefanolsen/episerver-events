@@ -8,7 +8,6 @@
 		<PackageId>StefanOlsen.Optimizely.Events.Sockets</PackageId>
 		<Product>StefanOlsen.Optimizely.Events.Sockets</Product>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags></PackageTags>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -27,10 +26,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="EPiServer.CMS.AspNetCore" Version="12.0.*" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\..\README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 </Project>
